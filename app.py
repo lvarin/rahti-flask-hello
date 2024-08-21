@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import flask
+import socket
 
 # Templates
 # In a proper Flask application all these templates should be in indepent files
@@ -57,9 +58,13 @@ def home():
       Hello page, shows photos in the /static folder
     '''
     kittens = Path('/static/').rglob('*.jpg')
+    #
+    hostname=socket.gethostname()
+    #print(hostname)
+    #
     return flask.render_template_string(
         PAGE,
-        student=config["student"],
+        student=hostname,
         kittens=kittens)
 
 # Entry function
